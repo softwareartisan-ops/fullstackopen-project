@@ -1,0 +1,1 @@
+This application contains the the Part 1 - Course Information exercices
