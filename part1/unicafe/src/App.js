@@ -1,31 +1,31 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 
 
 
 const App = () => {
   // save clicks of each button to its own state
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
-  const [feedbackCounter, setAll] = useState(0)
-  const total = good + neutral + bad
-  const average = (good * 1 + neutral * 0 + bad * (-1)) / total
-  const positive = good * 100 / total
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
+  const [feedbackCounter, setAll] = useState(0);
+  const total = good + neutral + bad;
+  const average = (good * 1 + neutral * 0 + bad * (-1)) / total;
+  const positive = good * 100 / total;
 
 //Handler functions that increment the count when clicking button
   const handleGood = () => {
-    setGood (good + 1)
-    setAll (feedbackCounter + 1)
+    setGood (good + 1);
+    setAll (feedbackCounter + 1);
   }
   const handleNeutral = () =>{ 
-    setNeutral(neutral + 1) 
-    setAll (feedbackCounter + 1)
+    setNeutral(neutral + 1);
+    setAll (feedbackCounter + 1);
   }
   
   const handleBad = () =>{
-    setBad(bad + 1)
-    setAll (feedbackCounter + 1)
+    setBad(bad + 1);
+    setAll (feedbackCounter + 1);
   }
 
 
@@ -42,7 +42,7 @@ const App = () => {
     </div>
 
     
-  )
+  );
 }
 
 
@@ -50,7 +50,7 @@ const Button = ({ handleClick, text }) =>
 (  <button onClick={handleClick}>    
           {text}  
     </button>
-)
+);
 
 
 const Statistics = (props) => { 
@@ -59,21 +59,13 @@ const Statistics = (props) => {
     return (
       <div>
       No Feedback given
-      </div>)
+      </div>);
   }  
   return (
    <div> 
     <h1>statistics</h1>
     <table>
       <tbody> 
-        <tr>
-          <td>
-          <StatisticLine text="good"  />
-          </td>
-          <td>
-          <StatisticLine value={props.good}/>
-          </td>
-        </tr>
         <tr>
           <td>
           <StatisticLine text="good"  />
@@ -130,11 +122,11 @@ const Statistics = (props) => {
     </table>
     </div>
 
-    )
+    );
 }
 
 const StatisticLine = (props) => {
-  return (<p>{props.text} {props.value}</p>)
+  return (<p>{props.text} {props.value}</p>);
 }
 
-export default App
+export default App;
