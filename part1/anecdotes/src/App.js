@@ -16,8 +16,9 @@ const App = () => {
   const [countVote, setCountVote] = useState(0);
   const len = anecdotes.length;
   const aVotes = new Uint8Array(len);
-  //const copyVotes = [...aVotes];
-  const [copyVotes, setVotes] = useState(aVotes)
+  const [copyVotes, setVotes] = useState(aVotes);
+  const [mostVoted, setMostVoted] = useState(0);
+  const [maxVote, setMaxVote] = useState(0);
 
 
 
@@ -38,23 +39,34 @@ const App = () => {
     //Set the vote into the  array of votes
     setVotes(copyVotes);
 
-     //Print array of votes
-    for(let i = 0 ; i < copyVotes.length ; i++){   
-      console.log ('v[',i, ']=' , copyVotes[i]);
-    }
     //Update the counter of votes
     setCountVote(updatedCount);
+
+    getMostVoted();
     
+  }
+
+  const getMostVoted = () => {
+    var result = copyVotes.indexOf(Math.max(...copyVotes));
+    setMostVoted(result);
+    setMaxVote(Math.max(...copyVotes));
   }
 
   return (
     <>
     <div>
+      <h1>Anecdote of the day</h1>
       {anecdotes[selected]}
       <p>has {countVote} votes</p>
-    </div>
+   
     <Button handleClick={handleVoting} text='vote' />
     <Button handleClick={handleNextAnecdote} text='next anecdote' />
+
+      <h1>Anecdote with most votes</h1>
+      {anecdotes[mostVoted]}
+      <p>has {maxVote} votes</p>
+    </div>
+
     </>
   );
 };
@@ -74,6 +86,7 @@ const getRandomInt = (min, max) => {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
+
 
 
 
