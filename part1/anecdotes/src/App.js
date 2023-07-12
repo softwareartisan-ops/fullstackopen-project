@@ -13,21 +13,48 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0);
+  const [countVote, setCountVote] = useState(0);
   const len = anecdotes.length;
+  const aVotes = new Uint8Array(len);
+  //const copyVotes = [...aVotes];
+  const [copyVotes, setVotes] = useState(aVotes)
 
-  
-  //select a random anecdote from the array of anecdotes
-  const handleRandomSelection = () =>{
+
+
+  //select a random index from the array of anecdotes
+  const handleNextAnecdote = () =>{
     const randomIndex = getRandomInt(0,len);
+    //reset counter of votes when the next anecdote button is clicked
+    setCountVote(0);
+    //Select the  randomly generated index
     setSelected(randomIndex);
+  }
+
+  //select a random anecdote from the array of anecdotes
+  const handleVoting = () =>{
+    const updatedCount = countVote + 1;
+    copyVotes[selected] = updatedCount;
+
+    //Set the vote into the  array of votes
+    setVotes(copyVotes);
+
+     //Print array of votes
+    for(let i = 0 ; i < copyVotes.length ; i++){   
+      console.log ('v[',i, ']=' , copyVotes[i]);
+    }
+    //Update the counter of votes
+    setCountVote(updatedCount);
+    
   }
 
   return (
     <>
     <div>
       {anecdotes[selected]}
+      <p>has {countVote} votes</p>
     </div>
-    <Button handleClick={handleRandomSelection} text='next anecdote' />
+    <Button handleClick={handleVoting} text='vote' />
+    <Button handleClick={handleNextAnecdote} text='next anecdote' />
     </>
   );
 };
